@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "tarjetacredito-7e96e": {
+      "hosting": {
+        "tarjetaCredito": [
+          "tarjetacredito-7e96e"
+        ]
+      }
+    }
+  }
+}

@@ -1,5 +1,30 @@
 <div class="card">
     <div class="card-body">
-        <h5 class="titulo">listar tarjeta</h5>
+        <h5 class="titulo">listar tarjeta
+            <div *ngIf="loading" class="spinner-border text-info float-end" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </h5>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Titular</th>
+                    <th>Numero Tarjeta</th>
+                    <th>Fecha Expiración</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let tarjeta of listTarjetas">
+                    <td>{{ tarjeta.titular | uppercase }}</td>
+                    <td>{{ tarjeta.numeroTarjeta }}</td>
+                    <td>{{ tarjeta.fechaExpiracion }}</td>
+                    <td>
+                        <i (click)="editarTarjeta(tarjeta)" class="far fa-edit text-info"></i>
+                        <i (click)="eliminarTarjeta(tarjeta.id)" class="fas fa-trash text-danger ml-1"></i>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>

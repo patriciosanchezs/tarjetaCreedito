@@ -1,30 +1,46 @@
 <div class="card">
     <div class="card-body">
-        <h5 class="titulo mb-3">crear tarjeta</h5>
-        <form>
+        <h5 class="titulo mb-3">{{ titulo }}
+            <div *ngIf="loading" class="spinner-border text-primary float-end" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </h5>
+        <form [formGroup]="form" (ngSubmit)="crearTarjeta()">
             <div class="input-group input-group-lg mb-3">
-                <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"></i></span>
-                <input type="text" class="form-control" placeholder="Titular">
+                <span class="input-group-text" id="basic-addon1"><i class="fas fa-user"
+                        [class.green-icon]="this.form.get('titular')?.valid"
+                        [class.red-icon]="this.form.get('titular')?.invalid && this.form.get('titular')?.touched"></i></span>
+                <input type="text" formControlName="titular" class="form-control" placeholder="Titular">
             </div>
             <div class="input-group input-group-lg mb-3">
-                <span class="input-group-text" id="basic-addon1"><i class="far fa-credit-card"></i></span>
-                <input type="text" class="form-control" placeholder="Numero de tarjeta">
+                <span class="input-group-text" id="basic-addon1"><i class="far fa-credit-card"
+                        [class.green-icon]="this.form.get('numeroTarjeta')?.valid"
+                        [class.red-icon]="this.form.get('numeroTarjeta')?.invalid && this.form.get('numeroTarjeta')?.touched"></i></span>
+                <input type="text" formControlName="numeroTarjeta" maxlength="16" class="form-control"
+                    placeholder="Numero de tarjeta">
             </div>
             <div class="row">
                 <div class="col-lg-7">
                     <div class="input-group input-group-lg mb-3">
-                        <span class="input-group-text" id="basic-addon1"><i class="far fa-calendar-alt"></i></span>
-                        <input type="text" class="form-control" placeholder="MM/YY">
+                        <span class="input-group-text" id="basic-addon1"><i class="far fa-calendar-alt"
+                                [class.green-icon]="this.form.get('fechaExpiracion')?.valid"
+                                [class.red-icon]="this.form.get('fechaExpiracion')?.invalid && this.form.get('fechaExpiracion')?.touched"></i></span>
+                        <input type="text" formControlName="fechaExpiracion" maxlength="5" class="form-control"
+                            placeholder="MM/YY">
                     </div>
                 </div>
                 <div class="col-lg-5">
                     <div class="input-group input-group-lg mb-3">
-                        <span class="input-group-text" id="basic-addon1"><i class="far fa-key"></i></span>
-                        <input type="password" class="form-control" placeholder="CVV">
+                        <span class="input-group-text" id="basic-addon1"><i class="far fa-key"
+                                [class.green-icon]="this.form.get('cvv')?.valid"
+                                [class.red-icon]="this.form.get('cvv')?.invalid && this.form.get('cvv')?.touched"></i></span>
+                        <input type="password" formControlName="cvv" maxlength="3" class="form-control"
+                            placeholder="CVV">
                     </div>
                 </div>
             </div>
-            <button class="btn btn-success btn-lg btn-block"><i class="far fa-database"></i>  INGRESAR TARJETA</button>
+            <button type="submit" [disabled]="form.invalid" class="btn btn-success btn-lg btn-block"><i
+                    class="far fa-database"></i> INGRESAR TARJETA</button>
         </form>
     </div>
 </div>
